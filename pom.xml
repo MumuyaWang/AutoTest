@@ -12,6 +12,15 @@
     <modules>
         <module>Chapter5</module>
         <module>Chapter6</module>
+        <module>Chapter9</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.10</version>
+        </dependency>
+    </dependencies>
 
 </project>
