@@ -92,7 +92,7 @@ public class MyCookiesForPost {
         String result;
 
         //设置cookies信息
-        //client.setCookieStire(this.store);
+        //client.setCookieStore(this.store);
         CookieStore cookieStore = this.store;
         client = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
 
