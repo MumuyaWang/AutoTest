@@ -1,9 +1,8 @@
 package com.course.server;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +13,13 @@ import java.util.Objects;
 
 
 @RestController   //我是需要被扫描的类
+@Api(value = "/",description = "这是我全部的get方法")
 public class MyGetMethod {
     /**
      * 10-3 返回cookies信息的get接口开发
      */
     @RequestMapping(value="/getCookies",method = RequestMethod.GET)     //访问路径，使用RequestMethod.GET这种方法访问
+    @ApiOperation(value = "通过这个方法可以获取到cookies",httpMethod = "GET")
     public String getCookies(HttpServletResponse response){
         //HttpServerLetRequest装请求信息的类
         //HttpServerLetResponse装响应信息的类
@@ -33,6 +34,7 @@ public class MyGetMethod {
      * 这是一个需要携带cookies信息访问的get接口开发
      * */
     @RequestMapping(value="/get/with/cookies",method = RequestMethod.GET)
+    @ApiOperation(value = "要求携带cookies信息访问的get接口开发",httpMethod = "GET")
     public String getWithCookies(HttpServletRequest request){
         Cookie[] cookies =request.getCookies();
         if(Objects.isNull(cookies)){
@@ -52,6 +54,7 @@ public class MyGetMethod {
      * 我们来模拟获取商品列表
      * */
     @RequestMapping(value ="/get/with/param",method =RequestMethod.GET )
+    @ApiOperation(value = "一个需要携带参数才能访问的get请求方法一",httpMethod = "GET")
     public Map<String,Integer> getList(@RequestParam Integer start, @RequestParam Integer end){
         Map<String ,Integer> myList = new HashMap<>();
         myList.put("鞋",400);
@@ -65,7 +68,9 @@ public class MyGetMethod {
      * url:ip:port/get/with/param/10/20
      * */
     @RequestMapping(value ="/get/with/param/{start}/{end}" )
-    public Map<String,Integer> mygetList(@RequestParam Integer start, @RequestParam Integer end){
+    @ApiOperation(value = "一个需要携带参数才能访问的get请求方法二",httpMethod = "GET")
+
+    public Map<String,Integer> mygetList(@PathVariable Integer start, @PathVariable Integer end){
         Map<String ,Integer> myList = new HashMap<>();
         myList.put("鞋",400);
         myList.put("干脆面",1);
