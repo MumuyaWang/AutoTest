@@ -29,38 +29,38 @@ public class GetUserInfoTest {
         System.out.println(getUserInfoCase.toString());
         System.out.println(TestConfig.getUserInfoUrl);
 
-//        JSONArray resultJson = getJsonResult(getUserInfoCase);
-//
-//        User user = session.selectOne(getUserInfoCase.getExpected(),getUserInfoCase);
-//
-//        List userList = new ArrayList();
-//        userList.add(user);
-//        JSONArray jsonArray = new JSONArray(userList);
-//        JSONArray jsonArray1 = new JSONArray(resultJson.getString(0));
-//        Assert.assertEquals(jsonArray.toString(),jsonArray1.toString());
+        JSONArray resultJson = getJsonResult(getUserInfoCase);
+
+        User user = session.selectOne(getUserInfoCase.getExpected(),getUserInfoCase);
+
+        List userList = new ArrayList();
+        userList.add(user);
+        JSONArray jsonArray = new JSONArray(userList);
+        JSONArray jsonArray1 = new JSONArray(resultJson.getString(0));
+        Assert.assertEquals(jsonArray.toString(),jsonArray1.toString());
     }
 
-//    private JSONArray getJsonResult(GetUserInfoCase getUserInfoCase) throws IOException {
-//        HttpPost post = new HttpPost(TestConfig.getUserInfoUrl);
-//        JSONObject param = new JSONObject();
-//        param.put("id",getUserInfoCase.getUserId());
-//
-//        post.setHeader("content-type","application/json");
-//
-//        StringEntity entity = new StringEntity(param.toString(),"utf-8");
-//
-//        post.setEntity(entity);
-//
-//        TestConfig.defaultHttpClient.setCookieStore(TestConfig.store);
-//
-//        String result;
-//        HttpResponse response = TestConfig.defaultHttpClient.execute(post);
-//
-//        result = EntityUtils.toString(response.getEntity(),"utf-8");
-//
-//        List resultList = Arrays.asList(result);
-//        JSONArray array = new JSONArray(resultList);
-//
-//        return array;
-//    }
+    private JSONArray getJsonResult(GetUserInfoCase getUserInfoCase) throws IOException {
+        HttpPost post = new HttpPost(TestConfig.getUserInfoUrl);
+        JSONObject param = new JSONObject();
+        param.put("id",getUserInfoCase.getUserId());
+
+        post.setHeader("content-type","application/json");
+
+        StringEntity entity = new StringEntity(param.toString(),"utf-8");
+
+        post.setEntity(entity);
+
+        TestConfig.defaultHttpClient.setCookieStore(TestConfig.store);
+
+        String result;
+        HttpResponse response = TestConfig.defaultHttpClient.execute(post);
+
+        result = EntityUtils.toString(response.getEntity(),"utf-8");
+
+        List resultList = Arrays.asList(result);
+        JSONArray array = new JSONArray(resultList);
+
+        return array;
+    }
 }

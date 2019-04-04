@@ -37,10 +37,10 @@ public class LoginTest {
         System.out.println(loginCase.toString());
         System.out.println(TestConfig.loginUrl);
 
-//        //第一步就是发送请求
-//        String result = getResult(loginCase);
-//        //验证结果
-//        Assert.assertEquals(loginCase.getExpected(),result);
+        //第一步就是发送请求
+        String result = getResult(loginCase);
+        //验证结果
+        Assert.assertEquals(loginCase.getExpected(),result);
 
     }
 
@@ -51,33 +51,32 @@ public class LoginTest {
         System.out.println(loginCase.toString());
         System.out.println(TestConfig.loginUrl);
 
-//        //第一步就是发送请求
-//        String result = getResult(loginCase);
-//        //验证结果
-//        Assert.assertEquals(loginCase.getExpected(),result);
+        //第一步就是发送请求
+        String result = getResult(loginCase);
+        //验证结果
+        Assert.assertEquals(loginCase.getExpected(),result);
 
     }
 
 
-//    private String getResult(LoginCase loginCase) throws IOException {
-//        HttpPost post = new HttpPost(TestConfig.loginUrl);
-//        JSONObject param = new JSONObject();
-//        param.put("userName",loginCase.getUserName());
-//        param.put("password",loginCase.getPassword());
-//
-//        post.setHeader("content-type","application/json");
-//
-//        StringEntity entity = new StringEntity(param.toString(),"utf-8");
-//        post.setEntity(entity);
-//
-//        String result;
-//        HttpResponse response = TestConfig.defaultHttpClient.execute(post);
-//        result = EntityUtils.toString(response.getEntity(),"utf-8");
-//
-//        TestConfig.store = TestConfig.defaultHttpClient.getCookieStore();
-//        return  result;
-//
-//    }
+    private String getResult(LoginCase loginCase) throws IOException {
+        HttpPost post = new HttpPost(TestConfig.loginUrl);
+        JSONObject param = new JSONObject();
+        param.put("userName",loginCase.getUserName());
+        param.put("password",loginCase.getPassword());
 
+        //设置头信息
+        post.setHeader("content-type","application/json");
 
+        StringEntity entity = new StringEntity(param.toString(),"utf-8");
+        post.setEntity(entity);
+
+        //存放返回结果
+        String result;
+        HttpResponse response = TestConfig.defaultHttpClient.execute(post);
+        result = EntityUtils.toString(response.getEntity(),"utf-8");
+
+        TestConfig.store = TestConfig.defaultHttpClient.getCookieStore();
+        return  result;
+    }
 }

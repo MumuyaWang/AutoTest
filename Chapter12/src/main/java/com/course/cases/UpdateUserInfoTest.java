@@ -24,11 +24,11 @@ public class UpdateUserInfoTest {
         System.out.println(updateUserInfoCase.toString());
         System.out.println(TestConfig.updateUserInfoUrl);
 
-//        int result = getResult(updateUserInfoCase);
-//        User user = session.selectOne(updateUserInfoCase.getExpected(),updateUserInfoCase);
-//
-//        Assert.assertNotNull(user);
-//        Assert.assertNotNull(result);
+        int result = getResult(updateUserInfoCase);
+        User user = session.selectOne(updateUserInfoCase.getExpected(),updateUserInfoCase);
+
+        Assert.assertNotNull(user);
+        Assert.assertNotNull(result);
 
     }
 
@@ -41,36 +41,36 @@ public class UpdateUserInfoTest {
         System.out.println(TestConfig.updateUserInfoUrl);
 
 
-//        int result = getResult(updateUserInfoCase);
-//        User user = session.selectOne(updateUserInfoCase.getExpected(),updateUserInfoCase);
-//
-//        Assert.assertNotNull(user);
-//        Assert.assertNotNull(result);
+        int result = getResult(updateUserInfoCase);
+        User user = session.selectOne(updateUserInfoCase.getExpected(),updateUserInfoCase);
+
+        Assert.assertNotNull(user);
+        Assert.assertNotNull(result);
     }
 
-//    private int getResult(UpdateUserInfoCase updateUserInfoCase) throws IOException, InterruptedException {
-//        HttpPost post = new HttpPost(TestConfig.updateUserInfoUrl);
-//        JSONObject param = new JSONObject();
-//        param.put("id",updateUserInfoCase.getUserId());
-//        param.put("userName",updateUserInfoCase.getUserName());
-//        param.put("sex",updateUserInfoCase.getSex());
-//        param.put("age",updateUserInfoCase.getAge());
-//        param.put("permission",updateUserInfoCase.getPermission());
-//        param.put("isDelete",updateUserInfoCase.getIsDelete());
-//
-//        post.setHeader("content-type","application/json");
-//        StringEntity entity = new StringEntity(param.toString(),"utf-8");
-//        post.setEntity(entity);
-//
-//        TestConfig.defaultHttpClient.setCookieStore(TestConfig.store);
-//
-//        String result;
-//        HttpResponse response = TestConfig.defaultHttpClient.execute(post);
-//
-//        result = EntityUtils.toString(response.getEntity(),"utf-8");
-//        Thread.sleep(10000);
-//
-//        return  Integer.parseInt(result);
-//    }
+    private int getResult(UpdateUserInfoCase updateUserInfoCase) throws IOException, InterruptedException {
+        HttpPost post = new HttpPost(TestConfig.updateUserInfoUrl);
+        JSONObject param = new JSONObject();
+        param.put("id",updateUserInfoCase.getUserId());
+        param.put("userName",updateUserInfoCase.getUserName());
+        param.put("sex",updateUserInfoCase.getSex());
+        param.put("age",updateUserInfoCase.getAge());
+        param.put("permission",updateUserInfoCase.getPermission());
+        param.put("isDelete",updateUserInfoCase.getIsDelete());
+
+        post.setHeader("content-type","application/json");
+        StringEntity entity = new StringEntity(param.toString(),"utf-8");
+        post.setEntity(entity);
+
+        TestConfig.defaultHttpClient.setCookieStore(TestConfig.store);
+
+        String result;
+        HttpResponse response = TestConfig.defaultHttpClient.execute(post);
+
+        result = EntityUtils.toString(response.getEntity(),"utf-8");
+        Thread.sleep(10000);
+
+        return  Integer.parseInt(result);
+    }
 
 }

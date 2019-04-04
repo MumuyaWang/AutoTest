@@ -11,5 +11,4 @@ public class User {
     private String sex;
     private String permission;
     private String isDelete;
-
 }

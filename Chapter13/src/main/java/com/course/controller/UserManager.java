@@ -28,14 +28,18 @@ public class UserManager {
     private SqlSessionTemplate template;
 
     @ApiOperation(value = "登陆接口",httpMethod = "POST")
+    //value 是访问路径
     @RequestMapping(value = "/login",method = RequestMethod.POST)
+    // @RequestBody User user--入参
     public Boolean login(HttpServletResponse response, @RequestBody User user){
+        //数据库里是不是有这个用户
         int i = template.selectOne("login",user);
         Cookie cookie = new Cookie("login","true");
         //返回cookie
         response.addCookie(cookie);
         //添加日志
         log.info("查询到的结果是"+i);
+        //只要能查到有login这个用户，就输出用户名
         if(i==1){
             log.info("登陆的用户是："+user.getUserName());
             return true;
@@ -46,8 +50,10 @@ public class UserManager {
     @ApiOperation(value = "添加用户接口",httpMethod = "POST")
     @RequestMapping(value = "addUser",method = RequestMethod.POST)
     public boolean addUser(HttpServletRequest request,@RequestBody User user){
+        //验证cookies的方法verifyCookies
         Boolean x = verifyCookies(request);
         int result=0;
+        //cookie验证通过后
         if(x!=null){
             result = template.insert("addUser",user);
         }
@@ -61,7 +67,9 @@ public class UserManager {
     @ApiOperation(value = "获取用户（列表）信息接口",httpMethod = "POST")
     @RequestMapping(value = "getUserInfo",method = RequestMethod.POST)
     public List<User> getUserInfo(HttpServletRequest request,@RequestBody User user){
+        //验证cookies的方法verifyCookies
         Boolean x = verifyCookies(request);
+        //验证通过后查询
         if(x==true){
             List<User> users = template.selectList("getUserInfo",user);
             log.info("getUserInfo获取到的用户数量是"+users.size());
@@ -69,7 +77,6 @@ public class UserManager {
         }else {
             return null;
         }
-
     }
 
     @ApiOperation(value = "更新/删除用户接口",httpMethod = "POSt")
@@ -84,6 +91,8 @@ public class UserManager {
         return i;
     }
 
+
+    //验证cookies的方法
     private Boolean verifyCookies(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if(Objects.isNull(cookies)){
